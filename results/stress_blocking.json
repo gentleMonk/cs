@@ -1,0 +1,27 @@
+{
+  "baseline": {
+    "candidate_pairs": 1201,
+    "true_pairs": 80,
+    "found_true_pairs": 80,
+    "recall": 1.0,
+    "false_candidate_pairs": 1121,
+    "candidate_reduction_vs_all_pairs": 0.9849
+  },
+  "identity_signal_erasure_12_true_pairs": {
+    "candidate_pairs": 1183,
+    "true_pairs": 80,
+    "found_true_pairs": 68,
+    "recall": 0.85,
+    "false_candidate_pairs": 1115,
+    "candidate_reduction_vs_all_pairs": 0.9852
+  },
+  "shared_name_prefix_100_records": {
+    "candidate_pairs": 5896,
+    "true_pairs": 80,
+    "found_true_pairs": 76,
+    "recall": 0.95,
+    "false_candidate_pairs": 5820,
+    "candidate_reduction_vs_all_pairs": 0.9261
+  },
+  "warning": "Synthetic adversarial changes. Not Splink library. Deliberately removing all shared features makes true duplicates unidentifiable from the chosen blocking features."
+}

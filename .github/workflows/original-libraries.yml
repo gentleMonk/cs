@@ -1,0 +1,65 @@
+name: Original Raha and Splink library verification
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-raha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install Raha from PyPI
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install raha
+          python -m pip freeze > raha_installed_packages.txt
+      - name: Run ORIGINAL Raha library
+        shell: bash
+        run: |
+          set -o pipefail
+          python optional_original_libs/run_raha_original_optional.py 2>&1 | tee raha_original_run.log
+      - name: Upload results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raha-original-reports
+          path: |
+            results/raha_library_result.json
+            raha_original_run.log
+            raha_installed_packages.txt
+          if-no-files-found: warn
+
+  original-splink:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Splink v5 from PyPI
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'splink>=5,<6' duckdb pandas pyarrow
+          python -m pip freeze > splink_installed_packages.txt
+      - name: Run ORIGINAL Splink v5 library
+        shell: bash
+        run: |
+          set -o pipefail
+          python optional_original_libs/run_splink5_original_optional.py 2>&1 | tee splink_original_run.log
+      - name: Upload results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: splink-original-reports
+          path: |
+            results/splink5_library_result.json
+            splink_original_run.log
+            splink_installed_packages.txt
+          if-no-files-found: warn
