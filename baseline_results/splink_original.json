@@ -1,0 +1,13 @@
+{
+  "library": "Splink_5",
+  "records": 400,
+  "predicted_pairs": 126,
+  "true_pairs": 80,
+  "tp": 55,
+  "fp": 71,
+  "fn": 25,
+  "precision": 0.4365,
+  "recall_all_pairs": 0.6875,
+  "seconds": 0.86,
+  "warning": "Evaluate blocking recall separately; training parameters not tuned, only a smoke test."
+}

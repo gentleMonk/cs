@@ -1,3 +1,0 @@
-strategy,trials,mean_precision,mean_recall,min_recall,max_recall,mean_positive_labels,unable_to_train_trials
-random,20,0.7871,0.34,0.0,0.8333,2.05,3
-uncertainty,20,0.8143,0.3567,0.0,0.7333,5.45,3

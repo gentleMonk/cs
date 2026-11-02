@@ -1,0 +1,68 @@
+name: Original Raha and Splink diagnostic verification V2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-raha-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install Raha
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'raha==1.26'
+          python -m pip freeze > raha_packages_v2.txt
+      - name: Audit source fixtures
+        run: python scripts/audit_fixture.py
+      - name: Run original Raha multiple labeling budgets
+        shell: bash
+        run: |
+          set -o pipefail
+          python scripts/run_raha_diagnostics.py 2>&1 | tee raha_original_diagnostics.log
+      - name: Upload results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raha-diagnostic-v2
+          path: |
+            results/fixture_audit.json
+            results/raha_diagnostics.json
+            raha_original_diagnostics.log
+            raha_packages_v2.txt
+          if-no-files-found: warn
+  original-splink-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Splink
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'splink==5.0.0' 'duckdb>=1.0' pandas pyarrow
+          python -m pip freeze > splink_packages_v2.txt
+      - name: Audit source fixtures
+        run: python scripts/audit_fixture.py
+      - name: Run original Splink threshold diagnostics
+        shell: bash
+        run: |
+          set -o pipefail
+          python scripts/run_splink_diagnostics.py 2>&1 | tee splink_original_diagnostics.log
+      - name: Upload results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: splink-diagnostic-v2
+          path: |
+            results/fixture_audit.json
+            results/splink_diagnostics.json
+            splink_original_diagnostics.log
+            splink_packages_v2.txt
+          if-no-files-found: warn

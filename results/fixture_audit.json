@@ -1,0 +1,23 @@
+{
+  "raha": {
+    "records": 220,
+    "columns": 5,
+    "true_error_cells": 42,
+    "error_cells_by_column": {
+      "id": 0,
+      "city": 9,
+      "postcode": 11,
+      "phone": 11,
+      "dept": 11
+    }
+  },
+  "splink": {
+    "records": 400,
+    "possible_pairs": 79800,
+    "true_pairs": 80,
+    "blocking_candidates": 762,
+    "true_pairs_in_candidates": 70,
+    "blocking_false_negative_pairs": 10,
+    "blocking_recall": 0.875
+  }
+}

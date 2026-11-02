@@ -1,0 +1,14 @@
+{
+  "library": "original_Raha",
+  "algorithm_families": [
+    "PVD",
+    "RVD"
+  ],
+  "labeled_rows": 20,
+  "predicted_error_cells": 33,
+  "precision": 1.0,
+  "recall": 0.7857142857142857,
+  "f1": 0.88,
+  "seconds": 0.5812885599999973,
+  "note": "Ground-truth oracle supplies synthetic human labels; not a blind production inference."
+}
